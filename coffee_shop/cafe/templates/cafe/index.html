@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейня</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">☕ Кофейня</div>
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#order">Заказать</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="{% url 'cart' %}" class="active">Корзина</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#menu" class="active">Меню</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="header-content fade-in">
+            <h1>Добро пожаловать в <span>Кофейню</span></h1>
+            <p>Ваш ежедневный источник свежезаваренного кофе!</p>
+            <a href="#order" class="btn">Сделать заказ</a>
+        </div>
+    </header>
+
+
+<section id="menu" class="menu-section fade-in">
+    <h2>Наше меню</h2>
+    <div class="menu-grid" id="menuGrid">
+        <!-- Статические примеры -->
+
+
+        <!-- Динамические карточки из админки -->
+        {% for coffee in coffee_menu %}
+        <div class="menu-item">
+            <img src="{{ coffee.image.url }}" alt="{{ coffee.name }}">
+            <h3>{{ coffee.name }}</h3>
+            <p>{{ coffee.description }}</p>
+            <p class="price">Цена: {{ coffee.price }}₽</p>
+            <p class="rating">Рейтинг: ⭐⭐⭐⭐⭐</p>
+            <button class="btn">Заказать</button>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+
+
+    <main>
+        <section id="order" class="content-section fade-in">
+            <h2>Оформить заказ</h2>
+            <form id="orderForm">
+                <label for="name">Ваше имя:</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required><br>
+                <label for="address">Адрес:</label>
+                <textarea id="address" name="address" placeholder="Введите ваш адрес" required></textarea><br>
+                <label for="coffee_type">Тип кофе:</label>
+                <input type="text" id="coffee_type" name="coffee_type" placeholder="Например, Латте" required><br>
+                <label for="quantity">Количество:</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Количество чашек" required><br>
+                <button type="submit">Оформить заказ</button>
+            </form>
+            <div id="response"></div>
+        </section>
+
+
+
+        <section id="about" class="content-section fade-in">
+            <h2>О нас</h2>
+            <p>В нашей кофейне мы готовим каждую чашку с любовью. Мы стремимся подарить вам лучший опыт наслаждения кофе.</p>
+        </section>
+
+        <section id="contact" class="content-section fade-in">
+            <h2>Контакты</h2>
+            <p>Email: support@coffeeshop.com</p>
+            <p>Телефон: +7 (123) 456-7890</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О Кофейне</h3>
+                <p>Мы доставляем аромат свежезаваренного кофе прямо к вашему порогу. Ваше удовлетворение - наш приоритет.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Email: support@coffeeshop.com</p>
+                <p>Телефон: +7 (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Мы в соцсетях</h3>
+                <p><a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
