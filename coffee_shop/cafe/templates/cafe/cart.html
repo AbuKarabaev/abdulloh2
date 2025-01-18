@@ -9,52 +9,73 @@
     <script src="{% static 'js/cart.js' %}" defer></script>
 </head>
 <body>
-    <div class="cart-container fade-in">
-        <h1>Моя корзина</h1>
-        <p>Для оформления заказа, нажмите «Оформить заказ».</p>
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Товар</th>
-                    <th>Кол-во</th>
-                    <th>Цена</th>
-                    <th>Сумма</th>
-                    <th>Действия</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if cart_items %}
-                {% for item in cart_items %}
-                <tr>
-                    <td><a href="#">{{ item.product_name }}</a></td>
-                    <td><input type="number" class="quantity-input" data-id="{{ item.id }}" value="{{ item.quantity }}" min="1"></td>
-                    <td>{{ item.price|floatformat:2 }} руб.</td>
-                    <td class="item-total">{{ item.total|floatformat:2 }} руб.</td>
-                    <td><a href="#" class="remove" data-id="{{ item.id }}">Удалить</a></td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="5" class="empty-cart">Корзина пуста</td>
-                </tr>
-                {% endif %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">Итого:</td>
-                    <td id="cart-total">{{ cart_total|floatformat:2 }} руб.</td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="coupon-container">
-            <label for="coupon">Купон:</label>
-            <input type="text" id="coupon" placeholder="Введите код купона">
-        </div>
-        <div class="cart-actions">
-            <button class="btn recalculate">Пересчитать</button>
-            <button class="btn checkout">Оформить заказ</button>
-        </div>
-    </div>
+    <main>
+        <!-- Корзина -->
+        <section class="cart-container fade-in" aria-labelledby="cart-title">
+            <h1 id="cart-title">Моя корзина</h1>
+            <p>Для оформления заказа нажмите «Оформить заказ».</p>
+
+            <!-- Таблица товаров -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Товар</th>
+                        <th scope="col">Кол-во</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Сумма</th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cart_items %}
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <a href="#" class="product-link" title="{{ item.product_name }}">{{ item.product_name }}</a>
+                        </td>
+                        <td>
+                            <input 
+                                type="number" 
+                                class="quantity-input" 
+                                data-id="{{ item.id }}" 
+                                value="{{ item.quantity }}" 
+                                min="1" 
+                                aria-label="Количество для {{ item.product_name }}">
+                        </td>
+                        <td>{{ item.price|floatformat:2 }} руб.</td>
+                        <td class="item-total">{{ item.total|floatformat:2 }} руб.</td>
+                        <td>
+                            <button class="remove-btn" data-id="{{ item.id }}" aria-label="Удалить {{ item.product_name }}">Удалить</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="empty-cart" aria-live="polite">Корзина пуста</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Итого:</td>
+                        <td id="cart-total">{{ cart_total|floatformat:2 }} руб.</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- Купон -->
+            <div class="coupon-container">
+                <label for="coupon">Купон:</label>
+                <input type="text" id="coupon" placeholder="Введите код купона" aria-label="Введите код купона">
+            </div>
+
+            <!-- Действия -->
+            <div class="cart-actions">
+                <button class="btn recalculate" aria-label="Пересчитать корзину">Пересчитать</button>
+                <button class="btn checkout" aria-label="Оформить заказ">Оформить заказ</button>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

@@ -1,15 +1,28 @@
+:root {
+    --primary-color: #e63946;
+    --hover-color: #d62828;
+    --secondary-color: #ffd700;
+    --background-color: #121212;
+    --dark-color: #1c1c1c;
+    --text-color: white;
+    --border-color: #333;
+    --input-bg: #222;
+    --transition-speed: 0.3s;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: white;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 .cart-container {
     width: 80%;
     margin: 50px auto;
     padding: 20px;
-    background: #1c1c1c;
+    background: var(--dark-color);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-in-out;
@@ -24,24 +37,27 @@ body {
 .cart-table th, .cart-table td {
     padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .cart-table th {
-    background-color: #333;
+    background-color: var(--border-color);
+    color: var(--text-color);
 }
 
 .cart-table .remove {
-    color: #e63946;
+    color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed);
 }
 
-.cart-table .remove:hover {
-    color: #ffd700;
+.cart-table .remove:hover,
+.cart-table .remove:focus {
+    color: var(--secondary-color);
 }
 
-.coupon-container, .cart-actions {
+.coupon-container, 
+.cart-actions {
     text-align: center;
     margin-top: 20px;
 }
@@ -49,25 +65,39 @@ body {
 .coupon-container input {
     padding: 10px;
     width: 300px;
-    border: 1px solid #555;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    background: #222;
-    color: white;
+    background: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color var(--transition-speed);
+}
+
+.coupon-container input:focus {
+    border-color: var(--secondary-color);
+    outline: none;
 }
 
 .btn {
     padding: 10px 20px;
     margin: 5px;
-    background-color: #e63946;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 5px;
-    color: white;
+    color: var(--text-color);
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background var(--transition-speed), transform var(--transition-speed);
 }
 
-.btn:hover {
-    background-color: #d62828;
+.btn:hover,
+.btn:focus {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+    outline: none;
+}
+
+.btn:active {
+    transform: scale(1);
+    transition: transform 0.1s;
 }
 
 @keyframes fadeIn {
