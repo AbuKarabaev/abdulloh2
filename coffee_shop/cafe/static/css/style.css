@@ -74,6 +74,7 @@ button:active,
 .navbar {
     position: fixed;
     top: 0;
+    height: 68px;
     left: 0;
     width: 100%;
     background: var(--dark-color);
@@ -264,5 +265,490 @@ footer p {
     footer .footer-content {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+
+
+/* === Секция меню === */
+.menu-section {
+    padding: 70px 20px;
+    background: linear-gradient(135deg, #1c1c1c, #2a2a2a); /* Градиент для фона */
+    text-align: center;
+    color: var(--text-color);
+}
+
+.menu-section h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Легкая тень на заголовке */
+}
+
+/* === Сетка меню === */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Гибкая сетка */
+    gap: 20px;
+    justify-items: center;
+    padding: 0 20px;
+}
+
+/* === Карточка меню === */
+.menu-item {
+    background: var(--card-bg); /* Фон карточки */
+    border-radius: 15px; /* Скругленные углы */
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Легкая тень */
+}
+
+.menu-item:hover {
+    transform: scale(1.05); /* Легкое увеличение */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Усиленная тень */
+}
+
+/* Изображение внутри карточки */
+.menu-item img {
+    width: 100%;
+    height: 200px; /* Высота для равномерного отображения */
+    object-fit: cover;
+    border-bottom: 3px solid var(--primary-color); /* Линия под изображением */
+    border-radius: 10px;
+}
+
+/* Информация о товаре */
+.menu-item-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 15px 0;
+}
+
+.menu-item-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+/* Кнопка добавления в корзину */
+.menu-item-info .btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Легкая тень */
+}
+
+.menu-item-info .btn:hover {
+    background: var(--hover-color);
+    transform: translateY(-3px); /* Легкий подъем */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+/* === Новый компактный стиль логотипа === */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    width: 154px;
+    height: 100px;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    border-radius: 50%; /* Круглый фон */
+    padding: 10px; /* Уменьшенный внутренний отступ */
+    position: relative;
+    left: -200px;
+}
+
+.logo img {
+    width: 80%; /* Логотип занимает 80% круга */
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.4)); /* Мягкая внутренняя тень */
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Легкое увеличение при наведении */
+    filter: brightness(1.1);
+    box-shadow: 0px 10px 18px rgba(0, 0, 0, 0.3); /* Усиленная тень при наведении */
+}
+
+/* Анимация появления логотипа */
+.logo {
+    animation: fadeInLogo 1s ease-out forwards;
+}
+
+@keyframes fadeInLogo {
+    from {
+        opacity: 0;
+        transform: scale(0.5); /* Появление из меньшего размера */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* Завершение в нормальном размере */
+    }
+}
+
+
+
+/* === Футер === */
+footer {
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #181818, #2c2c2c); /* Градиентный фон */
+    color: #f1f1f1; /* Светлый текст */
+    text-align: center;
+    box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.5); /* Глубокая тень сверху */
+    border-top: 4px solid var(--primary-color); /* Яркая линия разделения */
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стиль для секций футера */
+.footer-section {
+    flex: 1 1 300px; /* Гибкая ширина */
+    text-align: left;
+}
+
+.footer-section h3 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); /* Выразительная тень */
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: var(--hover-color);
+    text-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5); /* Подсветка ссылок */
+}
+
+/* Социальные иконки */
+.social-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--secondary-color);
+    color: #181818; /* Контрастный текст */
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Легкая тень */
+}
+
+.social-icon:hover {
+    background: var(--hover-color);
+    color: #fff;
+    transform: scale(1.1); /* Легкое увеличение */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Глубокая тень */
+}
+
+/* Нижняя часть футера */
+.footer-bottom {
+    font-size: 0.9rem;
+    margin-top: 20px;
+    padding-top: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+/* Адаптивность футера */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Вертикальная структура */
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+
+/* === Общие стили для телефонов (до 768px) === */
+@media (max-width: 768px) {
+    /* Навигация */
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .navbar ul li a {
+        padding: 8px 15px;
+        font-size: 1rem;
+        border-radius: 4px;
+        background: var(--card-bg); /* Легкий фон для кнопок */
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar ul li a:hover {
+        background: var(--hover-color);
+        color: #fff;
+    }
+
+    /* Хедер */
+    header {
+        padding: 40px 15px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+
+    header p {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    header .btn {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Меню */
+    .menu-section {
+        padding: 30px 10px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr; /* Одна колонка для компактного вида */
+        gap: 15px;
+    }
+
+    .menu-item img {
+        height: 140px; /* Уменьшенная высота изображений */
+        border-radius: 10px;
+    }
+
+    .menu-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .menu-item p {
+        font-size: 1rem;
+    }
+
+    .menu-item .btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    /* Футер */
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.95rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+/* === Маленькие телефоны (до 480px) === */
+@media (max-width: 480px) {
+    /* Навигация */
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar ul li a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+        box-shadow: none; /* Уменьшение теней для компактности */
+    }
+
+    /* Хедер */
+    header h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    header p {
+        font-size: 0.95rem;
+    }
+
+    header .btn {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Легкие тени */
+    }
+
+    /* Меню */
+    .menu-item img {
+        height: 120px; /* Уменьшенная высота для компактного вида */
+    }
+
+    .menu-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .menu-item p {
+        font-size: 0.9rem;
+    }
+
+    .menu-item .btn {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+
+    /* Футер */
+    .footer-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.85rem;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.75rem;
+    }
+}
+
+/* === Минимальные экраны (до 320px) === */
+@media (max-width: 320px) {
+    /* Навигация */
+    .navbar ul li a {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+
+    /* Хедер */
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 0.85rem;
+    }
+
+    header .btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    /* Меню */
+    .menu-item img {
+        height: 100px; /* Ещё меньше изображений */
+    }
+
+    .menu-item h3 {
+        font-size: 1rem;
+    }
+
+    .menu-item p {
+        font-size: 0.8rem;
+    }
+
+    .menu-item .btn {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+
+    /* Футер */
+    .footer-section h3 {
+        font-size: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.75rem;
+    }
+
+    .social-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.7rem;
     }
 }

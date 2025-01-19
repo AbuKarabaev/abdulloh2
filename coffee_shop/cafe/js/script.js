@@ -1,5 +1,5 @@
 // === Smooth Scroll to Target with Animation ===
-const smoothScrollTo = (target, duration = 1000) => {
+const smoothScrollTo = (target, duration = 600) => {
     const destination = document.querySelector(target);
     if (!destination) return;
 
@@ -7,13 +7,13 @@ const smoothScrollTo = (target, duration = 1000) => {
     const distance = destination.getBoundingClientRect().top;
     let startTime = null;
 
-    const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+    const easeOutQuad = (t) => t * (2 - t);
 
     const scroll = (currentTime) => {
         if (!startTime) startTime = currentTime;
         const elapsedTime = currentTime - startTime;
         const progress = Math.min(elapsedTime / duration, 1);
-        const ease = easeInOutQuad(progress);
+        const ease = easeOutQuad(progress);
 
         window.scrollTo(0, start + distance * ease);
 
@@ -23,7 +23,7 @@ const smoothScrollTo = (target, duration = 1000) => {
     requestAnimationFrame(scroll);
 };
 
-// === Attach Smooth Scroll ===
+// === Attach Smooth Scroll with Optimized Events ===
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
         e.preventDefault();
@@ -31,7 +31,29 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
 });
 
-// === Add to Cart Functionality ===
+// === Mobile Navigation ===
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNavToggle = document.createElement('button');
+    mobileNavToggle.classList.add('mobile-nav-toggle');
+    mobileNavToggle.innerHTML = '☰';
+    document.querySelector('.navbar').prepend(mobileNavToggle);
+
+    const navbarMenu = document.querySelector('.navbar ul');
+
+    mobileNavToggle.addEventListener('click', () => {
+        navbarMenu.classList.toggle('active');
+        mobileNavToggle.classList.toggle('active');
+    });
+
+    navbarMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            navbarMenu.classList.remove('active');
+            mobileNavToggle.classList.remove('active');
+        });
+    });
+});
+
+// === Add to Cart with Visual Feedback ===
 const addToCart = async (coffeeId) => {
     try {
         const response = await fetch('/add_to_cart/', {
@@ -46,14 +68,20 @@ const addToCart = async (coffeeId) => {
         if (!response.ok) throw new Error('Failed to fetch.');
 
         const result = await response.json();
-        alert(
+
+        const cartNotification = document.createElement('div');
+        cartNotification.classList.add('cart-notification');
+        cartNotification.textContent =
             result.status === 'success'
-                ? `Added to cart: ${result.product_name} (Quantity: ${result.quantity})`
-                : `Error: ${result.message}`
-        );
+                ? `Добавлено: ${result.product_name}`
+                : `Ошибка: ${result.message}`;
+
+        document.body.appendChild(cartNotification);
+
+        setTimeout(() => cartNotification.remove(), 2000);
     } catch (error) {
         console.error('Add to cart error:', error);
-        alert('Failed to add to cart due to a network error.');
+        alert('Ошибка при добавлении в корзину.');
     }
 };
 
@@ -65,7 +93,7 @@ document.querySelectorAll('.add-to-cart').forEach((button) => {
     });
 });
 
-// === Helper: Get CSRF Token ===
+// === Get CSRF Token Helper ===
 const getCookie = (name) => {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {
@@ -75,7 +103,7 @@ const getCookie = (name) => {
     return null;
 };
 
-// === Fade-in Animation ===
+// === Lazy Fade-in Animation ===
 const fadeInElements = document.querySelectorAll('.fade-in');
 const fadeObserver = new IntersectionObserver(
     (entries) => {
@@ -92,7 +120,7 @@ const fadeObserver = new IntersectionObserver(
 fadeInElements.forEach((element) => fadeObserver.observe(element));
 
 // === Highlight Active Navigation Link ===
-const updateNavigationHighlight = () => {
+const updateNavigationHighlight = debounce(() => {
     const sections = document.querySelectorAll('section');
     const scrollPosition = window.scrollY;
 
@@ -109,9 +137,11 @@ const updateNavigationHighlight = () => {
             });
         }
     });
-};
+}, 150);
 
-// === Debounce for Scroll Events ===
+window.addEventListener('scroll', updateNavigationHighlight);
+
+// === Debounce for Optimized Events ===
 const debounce = (func, wait = 100) => {
     let timeout;
     return (...args) => {
@@ -120,38 +150,17 @@ const debounce = (func, wait = 100) => {
     };
 };
 
-window.addEventListener('scroll', debounce(updateNavigationHighlight));
-
 // === Branding Animation ===
 document.addEventListener('DOMContentLoaded', () => {
     const brandingAnimation = document.getElementById('branding-animation');
-    const letters = document.querySelectorAll('.letter');
-
     if (brandingAnimation) {
-        // Animate Letters
-        letters.forEach((letter, index) => {
-            const randomX = Math.random() * 200 - 100;
-            const randomY = Math.random() * 200 - 100;
-            letter.style.setProperty('--random-x', `${randomX}px`);
-            letter.style.setProperty('--random-y', `${randomY}px`);
-            letter.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Interactive Effects
         brandingAnimation.addEventListener('mouseenter', () => {
             brandingAnimation.style.transform = 'scale(1.05)';
-            brandingAnimation.style.transition = 'transform 0.5s ease';
         });
 
         brandingAnimation.addEventListener('mouseleave', () => {
             brandingAnimation.style.transform = 'scale(1)';
         });
-
-        // Background Transition
-        setTimeout(() => {
-            document.body.style.background = 'linear-gradient(135deg, var(--dark-color), var(--secondary-color))';
-            document.body.style.transition = 'background 1.5s ease-in-out';
-        }, 3000);
     }
 });
 
@@ -159,3 +168,57 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('resize', debounce(() => {
     console.log('Window resized. Adjust layout or styles if necessary.');
 }));
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNavToggle = document.createElement('button');
+    mobileNavToggle.classList.add('mobile-nav-toggle');
+    mobileNavToggle.innerHTML = '☰'; // Иконка меню
+    document.querySelector('.navbar').prepend(mobileNavToggle);
+
+    const navbarMenu = document.querySelector('.navbar ul');
+
+    // Открытие/закрытие мобильного меню
+    mobileNavToggle.addEventListener('click', () => {
+        navbarMenu.classList.toggle('active');
+        mobileNavToggle.classList.toggle('active');
+    });
+
+    // Закрытие меню при выборе ссылки
+    navbarMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            navbarMenu.classList.remove('active');
+            mobileNavToggle.classList.remove('active');
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // Добавить обработчик на все кнопки "Добавить в корзину"
+    document.querySelectorAll('.add-to-cart').forEach((button) => {
+        button.addEventListener('click', async (event) => {
+            const coffeeId = button.getAttribute('data-id');
+
+            try {
+                const response = await fetch('/add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken, // Для защиты от CSRF
+                    },
+                    body: JSON.stringify({ coffee_id: coffeeId }),
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    alert(`Добавлено в корзину: ${data.product_name}. Количество: ${data.quantity}`);
+                } else {
+                    alert(`Ошибка: ${data.message}`);
+                }
+            } catch (error) {
+                console.error('Ошибка при добавлении в корзину:', error);
+                alert('Не удалось добавить в корзину из-за сетевой ошибки.');
+            }
+        });
+    });
+});

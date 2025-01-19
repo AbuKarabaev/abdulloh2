@@ -19,11 +19,10 @@ def cart(request):
     """
     cart_items = CartItem.objects.all()
     cart_total = sum(item.price * item.quantity for item in cart_items)
-    return render(request, 'cart.html', {
+    return render(request, 'cafe/cart.html', {  # Изменено на cafe/cart.html
         'cart_items': cart_items,
         'cart_total': cart_total
     })
-
 
 @require_POST
 @csrf_exempt

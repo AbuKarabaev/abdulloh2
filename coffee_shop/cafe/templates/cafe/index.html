@@ -1,4 +1,6 @@
 {% load static %}
+{% csrf_token %}
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -18,11 +20,10 @@
     <!-- Навигация -->
     <header>
         <nav class="navbar fade-in" role="navigation" aria-label="Главное меню">
-            <div class="logo">
-                <a href="#home">
-                    <img src="{% static 'images/logo.png' %}" alt="Логотип Кофейни">
-                </a>
-            </div>
+<div class="logo">
+    <img src="{% static 'images/logo1.jpg' %}" alt="Логотип Кофейни">
+</div>
+
             <ul class="nav-links">
                 <li><a href="#home" aria-label="Перейти на главную">Главная</a></li>
                 <li><a href="#menu" aria-label="Посмотреть меню">Меню</a></li>
@@ -77,31 +78,32 @@
         </section>
     </main>
 
-    <!-- Футер -->
-    <footer>
-        <section class="footer-content">
-            <article class="footer-section">
-                <h3>О Кофейне</h3>
-                <p>Мы доставляем свежезаваренный кофе прямо к вашему порогу. Вдохновляем каждого клиента своим качеством и вниманием к деталям.</p>
-            </article>
-            <article class="footer-section">
-                <h3>Контакты</h3>
-                <p>Email: <a href="mailto:support@coffeeshop.com">support@coffeeshop.com</a></p>
-                <p>Телефон: <a href="tel:+71234567890">+7 (123) 456-7890</a></p>
-            </article>
-            <article class="footer-section">
-                <h3>Следите за нами</h3>
-                <p>
-                    <a href="#" aria-label="Facebook">Facebook</a> |
-                    <a href="#" aria-label="Instagram">Instagram</a> |
-                    <a href="#" aria-label="Twitter">Twitter</a>
-                </p>
-            </article>
-        </section>
-        <div class="footer-bottom">
-            <p>© 2025 Кофейня. Все права защищены.</p>
-        </div>
-    </footer>
+<!-- Футер -->
+<footer>
+    <section class="footer-content">
+        <article class="footer-section">
+            <h3>О Кофейне</h3>
+            <p>Мы доставляем свежезаваренный кофе прямо к вашему порогу. Вдохновляем каждого клиента своим качеством и вниманием к деталям.</p>
+        </article>
+        <article class="footer-section">
+            <h3>Контакты</h3>
+            <p>Email: <a href="mailto:support@coffeeshop.com">support@coffeeshop.com</a></p>
+            <p>Телефон: <a href="tel:+71234567890">+7 (123) 456-7890</a></p>
+        </article>
+        <article class="footer-section">
+            <h3>Следите за нами</h3>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook" class="social-icon">F</a>
+                <a href="#" aria-label="Instagram" class="social-icon">I</a>
+                <a href="#" aria-label="Twitter" class="social-icon">T</a>
+            </div>
+        </article>
+    </section>
+    <div class="footer-bottom">
+        <p>© 2025 Кофейня. Все права защищены.</p>
+    </div>
+</footer>
+
     <script src="{% static 'js/script.js' %}" defer></script>
 
 </body>
