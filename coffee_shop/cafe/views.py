@@ -3,7 +3,29 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .models import Coffee, CartItem, CoffeeOrder
+import requests
 
+TELEGRAM_BOT_TOKEN = "7773769474:AAED9waVV3s8quGbjwl8DP_YyuTtvx6qznk"
+CHAT_ID = "6903472998"
+
+def send_order_to_bot(phone, address, payment):
+    message = (
+        f"📢 Новый заказ:\n"
+        f"📞 Телефон: {phone}\n"
+        f"📍 Адрес: {address}\n"
+        f"💳 Оплата: {payment}"
+    )
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    data = {"chat_id": CHAT_ID, "text": message}
+    response = requests.post(url, data=data)
+    return response.status_code
+
+
+def about_view(request):
+    """
+    Renders the 'О нас' page.
+    """
+    return render(request, 'cafe/onas.html')
 
 def index(request):
     """
@@ -19,13 +41,13 @@ def cart(request):
     """
     cart_items = CartItem.objects.all()
     cart_total = sum(item.price * item.quantity for item in cart_items)
-    return render(request, 'cafe/cart.html', {  # Изменено на cafe/cart.html
+    return render(request, 'cafe/cart.html', {
         'cart_items': cart_items,
         'cart_total': cart_total
     })
 
+
 @require_POST
-@csrf_exempt
 def add_to_cart(request):
     """
     Adds a coffee item to the cart. If the item already exists, increments its quantity.
@@ -52,6 +74,7 @@ def add_to_cart(request):
             'quantity': cart_item.quantity
         })
     except Exception as e:
+        print(f"Error in add_to_cart: {e}")
         return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
 

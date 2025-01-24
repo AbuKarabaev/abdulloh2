@@ -17,5 +17,3 @@ class CoffeeOrderAdmin(admin.ModelAdmin):
     list_display = ('name', 'coffee_type', 'quantity', 'total_price', 'created_at')
     search_fields = ('name', 'coffee_type__name')
     list_filter = ('created_at',)
-from django.contrib import admin
-from .models import CoffeeOrder

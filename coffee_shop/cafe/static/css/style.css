@@ -56,6 +56,8 @@ button,
     cursor: pointer;
     transition: background var(--transition-duration), transform var(--transition-duration), box-shadow var(--transition-duration);
     box-shadow: 0 4px 8px var(--shadow-color);
+    position: relative;
+    z-index: 3;
 }
 
 button:hover,
@@ -108,11 +110,8 @@ button:active,
     transform: scale(1.1);
 }
 
-/* === Хедер === */
 header {
     height: 747px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
-        url('/static/images/fon.PNG') no-repeat center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,8 +119,22 @@ header {
     text-align: center;
     color: var(--secondary-color);
     padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/fon.png') no-repeat center/cover;
+    z-index: 1;
     transition: background var(--transition-duration);
 }
+
 
 header h1 {
     font-size: 4.5rem;
@@ -129,6 +142,8 @@ header h1 {
     text-shadow: 3px 3px 12px var(--shadow-color);
     margin-bottom: 20px;
 }
+
+
 
 header p {
     font-size: 1.8rem;
@@ -139,6 +154,7 @@ header p {
 header .btn {
     font-size: 1.2rem;
     padding: 15px 30px;
+    
 }
 
 /* === Секция меню === */
@@ -368,15 +384,17 @@ footer p {
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
     border-radius: 50%; /* Круглый фон */
     padding: 10px; /* Уменьшенный внутренний отступ */
-    position: relative;
-    left: -200px;
+
+
 }
 
 .logo img {
     width: 80%; /* Логотип занимает 80% круга */
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.4)); /* Мягкая внутренняя тень */
+    filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.4)); 
+    position: relative;
+    right: 370px;
 }
 
 .logo:hover {
@@ -751,4 +769,21 @@ footer {
     .footer-bottom {
         font-size: 0.7rem;
     }
+}
+
+
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0; /* Orqa fon uchun rang */
+    z-index: 0; /* Fonga o'tkazish */
+}
+
+.foreground {
+    position: relative;
+    z-index: 1; /* Old tomonga olib chiqish */
 }

@@ -27,7 +27,7 @@
             <ul class="nav-links">
                 <li><a href="#home" aria-label="Перейти на главную">Главная</a></li>
                 <li><a href="#menu" aria-label="Посмотреть меню">Меню</a></li>
-                <li><a href="#about" aria-label="Узнать о нас">О нас</a></li>
+                <li><a href="{% url 'about' %}" aria-label="Узнать о нас">О нас</a></li>
                 <li><a href="#contact" aria-label="Контактная информация">Контакты</a></li>
                 <li><a href="{% url 'cart' %}" class="active" aria-label="Корзина">Корзина</a></li>
             </ul>
@@ -36,8 +36,12 @@
             <div class="header-content">
                 <h1>Добро пожаловать в <span>Кофейню</span></h1>
                 <p>Ваш ежедневный источник <span>свежезаваренного кофе</span>!</p>
-                <a href="#menu" class="btn" aria-label="Перейти к меню">Посмотреть меню</a>
-            </div>
+                <a  href="#menu"  class="btn" aria-label="Перейти к меню">Посмотреть меню</a>
+                <div class="background">
+                
+            </div> 
+            
+        </div>
         </section>
     </header>
 
@@ -70,6 +74,9 @@
                 {% endfor %}
             </div>
         </section>
+        
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        
 
         <!-- О нас -->
         <section id="about" class="content-section fade-in">
@@ -87,8 +94,9 @@
         </article>
         <article class="footer-section">
             <h3>Контакты</h3>
-            <p>Email: <a href="mailto:support@coffeeshop.com">support@coffeeshop.com</a></p>
-            <p>Телефон: <a href="tel:+71234567890">+7 (123) 456-7890</a></p>
+            <p>Email: <a href="sale@sushishef1.ru">sale@sushishef1.ru</a></p>
+            <li>Телефон: <a href="tel:+79853434319">+7(985)343-43-19 </a>
+                 <a href="tel:+74993770606">+7(499)377-06-06</a></li>
         </article>
         <article class="footer-section">
             <h3>Следите за нами</h3>
@@ -99,9 +107,7 @@
             </div>
         </article>
     </section>
-    <div class="footer-bottom">
-        <p>© 2025 Кофейня. Все права защищены.</p>
-    </div>
+   
 </footer>
 
     <script src="{% static 'js/script.js' %}" defer></script>

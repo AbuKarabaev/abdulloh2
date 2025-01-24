@@ -1,0 +1,55 @@
+/* Navbar umumiy uslubi */
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+    margin: 0;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px; /* Qo'shimcha yaxlitlik uchun */
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    padding: 12px 18px; /* Tugmalar kattaligini yaxshilash */
+    border-radius: 8px; /* Barcha tugmalarga yaxlit qirralar qo'shildi */
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform 0.2s ease-in-out;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: scale(1.1); /* Harakat effektini birlashtirish */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Hoverda yanada kuchliroq soya */
+}
+
+/* Navbar ichidagi tugmalar uchun hover effekti */
+.nav-links a:hover {
+    transform: scale(1.15); /* Kattalik oshirildi, ko'zga ko'rinarli bo'lishi uchun */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Hover soyasini kengaytirish */
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Kichik ekranda bo'shliqni oshirish */
+        padding: 15px 0; /* Kattaroq padding mobil uchun */
+    }
+
+    .nav-links a {
+        font-size: 1rem; /* Optimal mobil o'qish kattaligi */
+        padding: 10px 20px; /* Tugmalarni to'ldirishni oshirish */
+    }
+}
+        
